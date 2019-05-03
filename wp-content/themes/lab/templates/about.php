@@ -1,8 +1,4 @@
 <?php
-
-$titredesc = get_theme_mod('titredesc');
-$titredesc2 = get_theme_mod('titredesc2');
-$titredesc3 = get_theme_mod('titredesc3');
 $descolgauche = get_theme_mod('descolgauche'); 
 $desccoldroite = get_theme_mod('desccoldroite');  
 $video = get_theme_mod('themeslug_url_setting_id');
@@ -45,7 +41,7 @@ $query = new WP_Query( $args );?>
 		<div class="about-contant">
 			<div class="container">
 				<div class="section-title">
-					<h2><?php echo $titredesc . ' ' ?><span><?php echo $titredesc2 ?></span><?php echo ' ' . $titredesc3 ?></h2>
+					<h2><?=(spanToStyle('titredesc'));?></h2>
 				</div>
 				<div class="row">
 					<div class="col-md-6">

@@ -7,9 +7,8 @@ get_template_part("templates/headerServices");
 <div class="page-section spad">
 		<div class="container">
 			<div class="row">
-
 				<div class="col-md-8 col-sm-7 blog-posts">
-                <h1><?php echo 'Recherche pour: ' . get_query_var('tag') . get_query_var('category_name') ?></h1>
+                <h1><?php echo 'Resultat pour: ' . get_query_var('tag') . get_query_var('category_name') ?></h1>
                 <br>
                 <br>
                 <?php while (have_posts()): the_post();?>
@@ -43,21 +42,7 @@ get_template_part("templates/headerServices");
 			                    </div>
 					        <?php endwhile;?>					
                 </div>
-                <!-- Sidebar area -->
-				<div class="col-md-4 col-sm-5 sidebar">
-				<?php get_search_form(); ?>
-					<?php dynamic_sidebar('sidebar');?>
-					<div class="widget-item">
-						<h2 class="widget-title">Tags</h2>
-						<ul class="tag">
-						<?php 
-						$allTags = get_tags();
-						foreach ($allTags as $tag) { 	?>
-							<li><a href="<?= get_tag_link($tag); ?>"><?= $tag->name ?></a></li>
-						<?php } ?>
-						</ul>
-					</div>
-				</div>
+								<?php get_template_part('templates/sideabar'); ?>
 			</div>
 		</div>
     </div>

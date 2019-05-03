@@ -13,7 +13,9 @@ add_action('widgets_init', [DishOfTheDayWidget::class, 'register']);
 add_action('admin_init',[Section::class,'init']);
 add_action('admin_menu',[Page::class,'init']);
 add_action('admin_action_send-mail', [MailController::class, 'send']);
-add_action('admin_action_send-news', [MailController::class, 'sendNew']);
+add_action('admin_post_send-news', [MailController::class, 'sendNew']);
+add_action('admin_post_nopriv_send-news', [MailController::class, 'sendNew']);
+
 
 
 

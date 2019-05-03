@@ -3,6 +3,4 @@
     <!--le name de cette input est "s" pour string afin de rechercher un mot-->
     <input class="form-control" type="text" placeholder="Search" style="position: relative; padding: 6%; border: 0;" name="s" id="">
     <button class="search-btn" type="submit"><i class="flaticon-026-search" style="position: absolute; top:25%; left:40%"></i></button>
-</form> 
-
-
+</form>

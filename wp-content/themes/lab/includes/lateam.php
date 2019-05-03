@@ -45,9 +45,17 @@ function wpt_membre() {
 		'has_archive'          => true,
                 'menu_icon'            => 'dashicons-businessman',
                 'taxonomies'          => array('post_tag'),
-
+                'capabilities' => array(
+                        'edit_post' => 'edit_membre',
+                        'edit_posts' => 'edit_membres',
+                        'edit_others_posts' => 'edit_other_membres',
+                        'publish_posts' => 'publish_membres',
+                        'read_post' => 'read_membre',
+                        'read_private_posts' => 'read_private_membres',
+                        'delete_post' => 'delete_membre',
+                    ),
         );
-        register_post_type( 'membres', $args );
+        register_post_type( 'membre', $args );
 
 }
 add_action( 'init', 'wpt_membre' );

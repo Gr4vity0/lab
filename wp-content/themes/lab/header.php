@@ -30,7 +30,7 @@ $logo = get_theme_mod('logo');
 	<!-- Header section -->
 	<header class="header-section">
 		<div class="logo">
-			<img src="<?php echo esc_url($logo) ?>" alt=""><!-- Logo -->
+			<img src="<?php echo esc_url($logo) ?>" alt="" height="32px" width="111px"><!-- Logo -->
 
 		</div>
 		<!-- Navigation -->

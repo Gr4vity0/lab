@@ -1,7 +1,5 @@
 <?php
-$titreservices = get_theme_mod('titreservice');
-$titreservices2 = get_theme_mod('titreservice2');
-$titreservices3 = get_theme_mod('titreservice3');
+
 $args = array(
 	'post_type'   => 'services',
 	'orderby' => 'rand',
@@ -14,7 +12,7 @@ $query = new WP_Query( $args );?>
 	<div class="services-section spad">
 		<div class="container">
 			<div class="section-title dark">
-				<h2><?= $titreservices ?> <span><?= $titreservices2 ?></span><?= ' ' . $titreservices3 ?></h2>
+				<h2><?=(spanToStyle('titreservice'));?></h2>
 			</div>
 			<div class="row">
 				<!-- single service -->
@@ -33,7 +31,7 @@ $query = new WP_Query( $args );?>
 				<?php endwhile; ?>
 			</div>
 			<div class="text-center">
-				<a href="/index.php?page_id=51" class="site-btn">Browse</a>
+				<a href="/index.php/service" class="site-btn">Browse</a>
 			</div>
 		</div>
 	</div>

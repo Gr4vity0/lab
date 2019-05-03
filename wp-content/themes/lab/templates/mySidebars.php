@@ -9,7 +9,7 @@ $citation = get_theme_mod('citation'); ?>
 						<?php 
 						$allTags = get_tags();
 						foreach ($allTags as $tag) { 	?>
-							<li><a href=""><?= $tag->name ?></a></li>
+							<li><a href="<?= get_term_link($tag); ?>"><?= $tag->name ?></a></li>
 						<?php } ?>
 						</ul>
 					</div>

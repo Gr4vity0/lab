@@ -32,6 +32,8 @@ require_once(INCLUDE_DIR . '/tagtaxo.php');
 
 require_once(INCLUDE_DIR . '/pagination.php');
 
+require_once(INCLUDE_DIR . '/span.php');
+
 
 
 

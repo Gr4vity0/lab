@@ -7,6 +7,7 @@ use App\Http\Models\Mail;
 use App\Http\Models\News;
 
 use App\Http\Middlewares\CheckPermission;
+
 class MailController
 {
   public static function send()
@@ -30,23 +31,24 @@ class MailController
     // Nous récupérons les données envoyé par le formulaire qui se retrouve dans la variable $_POST
     $email = sanitize_email($_POST['email']);
     $name = sanitize_text_field($_POST['name']);
+    $subject = $_POST['subject'];
 
     $message = sanitize_textarea_field($_POST['message']);
     // on créer un 5ème paramètre que l'on va passer a notre function wp_mail,il nous permet d'interpeté le contenu de notre message(le contenu de template-mail.html.php)
-    $header='Content-Type: text/html; charset=UTF-8';
+    $header = 'Content-Type: text/html; charset=UTF-8';
 
     // on à remplacé notre pavé par un helper qui le contient et on le stock dans une variable qu'on passe à notre wp_mail.
-    $mail = mail_template('pages/template-mail',compact('name','message'));
-  
+    $mail = mail_template('pages/template-mail', compact('name', 'message'));
+
     // Si le mail est bien envoyé status = 'success' sinon 'error'
-    if(wp_mail($email, 'Pour ' . $name . ' ' , $mail, $header)) {
+    if (wp_mail($email, 'Pour ' . $name . ' ', $mail, $header)) {
       $_SESSION['notice'] = [
         'status' => 'success',
         'message' => 'votre e-mail a bien été envoyé'
       ];
 
       // Nous allons également sauvegarder en base de donnée les mails que nous avons envoyé.
-          // Refactoring pour apprendre et utiliser les models. Seul les models peuvent intéragir avec la base de donnée.
+      // Refactoring pour apprendre et utiliser les models. Seul les models peuvent intéragir avec la base de donnée.
       // on instancie la class Mail et on rempli les valeurs dans les propriétés.
       $mail = new Mail();
       $mail->userid = get_current_user_id();
@@ -61,24 +63,36 @@ class MailController
         'status' => 'error',
         'message' => 'Une erreur est survenue, veuillez réessayer plus tard'
       ];
+      $_SESSION['old'] = [
+        'email' => $email,
+        'name' => $name,
+        'subject' => $subject,
+        'message' => $message,
+      ];
     }
     // la fonction wp_safe_redirect redirige vers une url. La fonction wp_get_referer renvoi vers la page d'ou la requête a été envoyé.
     wp_safe_redirect(wp_get_referer());
-  
   }
 
-  public static function sendNew(){
+  public static function sendNew()
+  {
     $email = sanitize_email($_POST['emailNew']);
 
-    if(wp_mail('Admin@admin.be', 'Pour xxx ' , $email . ' est inscrit a la newsletter ')) {
+    Request::validation2([
+      'emailNew' => 'email',
+    ]);
+
+    if (wp_mail('Admin@admin.be', 'Pour xxx ', $email . ' est inscrit a la newsletter ')) {
 
       $mail = new News();
       $mail->email = $email;
       // Sauvegarde du mail dans la base de donnée
-      $mail->save(); 
-    } else {
-  
-    }
+      $mail->save();
+      $_SESSION['notice2'] = [
+        'status' => 'success',
+        'message' => 'votre e-mail a bien été envoyé'
+      ];
+    } else { }
 
     wp_safe_redirect(wp_get_referer());
   }
@@ -89,16 +103,21 @@ class MailController
     CheckPermission::check('read_email');
     // on va chercher toute les entrés de la table dont le model mail s'occupe et on inverse l'ordre afin d'avoir le plus récent en premier.
     $mails = array_reverse(Mail::all());
-    $news = News::all();
+    // Si $_SESSION['old'] existe alors on déclare une variable $old dans la quelle on stock son contenu puis on detruit notre global $_SESSION['old']
+    if (isset($_SESSION['old'])) {
+      $old = $_SESSION['old'];
+      unset($_SESSION['old']);
+    };
+    $news = array_reverse(News::all());
     // Si $_SESSION['old'] existe alors on déclare une variable $old dans la quelle on stock son contenu puis on detruit notre global $_SESSION['old']
     if (isset($_SESSION['old'])) {
       $old = $_SESSION['old'];
       unset($_SESSION['old']);
     }
     // on envoi notre variable $old qui contient les anciennes valeurs dans notre view send-mail pour qu'on puisse afficher son contenu dans les champs.
-    view('pages/send-mail',compact('old','mails','news'));
+    view('pages/send-mail', compact('old', 'mails', 'news'));
   }
-    /**
+  /**
    * Affiche une entré en particulier
    *
    * @return void
@@ -129,7 +148,7 @@ class MailController
         'message' => 'Le mail a bien été supprimé'
       ];
       wp_safe_redirect(menu_page_url('mail-client'));
-    } 
+    }
     // Si le mail na pas été supprimé on renvoi sur la page avec une notification négative
     else {
       $_SESSION['notice'] = [
@@ -138,7 +157,6 @@ class MailController
       ];
       wp_safe_redirect(wp_get_referer());
     }
-
   }
   // function qui permet d'aller dans le BDD récupérer le mail dont l'id à été envoyé en POST via le link dans l'url
   public static function edit()

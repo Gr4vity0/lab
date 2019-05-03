@@ -1,5 +1,5 @@
 <?php get_header();
-
+require_once get_template_directory() . "/includes/span.php";
 
 $totalcomments = get_comments_number();
 $paged = (get_query_var('paged')) ? get_query_var('paged') : 1;
@@ -26,7 +26,7 @@ $args4 = array(
 $query4 = new WP_Query($args4);
 
 
-get_template_part('templates/pageheader'); ?>
+get_template_part('templates/headertitre'); ?>
 
 
 <!-- page section -->
@@ -49,14 +49,12 @@ get_template_part('templates/pageheader'); ?>
 							<h2 class="post-title"><?= the_title(); ?></h2>
 							<div class="post-meta">
 								<a href=""><?= the_author(); ?></a>
-								<a href="">
+								
 									<?php
-									$allTags = get_the_tags();
-									foreach ($allTags as $tag) {
-										echo $tag->name . ' ,';
-									}
-									?>
-								</a>
+									$allTags = get_categories();
+									foreach ($allTags as $tag) {?>
+										<a href="<?= get_category_link($tag); ?>"><?php echo $tag->name . ' , '; ?></a>
+									<?php } ?>
 								<a href=""><?= get_comments_number() ?> Comments</a>
 							</div>
 							<p><?php the_excerpt(); ?></p>
@@ -75,20 +73,12 @@ get_template_part('templates/pageheader'); ?>
 				</div>
 			</div>
 
-			<!-- Sidebar area -->
-			<div class="col-md-4 col-sm-5 sidebar">
-				<!-- Single widget -->
-				<div class="widget-item">
-					<?php get_search_form(); ?>
-				</div>
-				<?php dynamic_sidebar('sidebar'); ?>
-				<?php get_template_part('templates/mySidebars'); ?>
-			</div>
+<?php get_template_part('templates/sideabar'); ?>
 		</div>
 	</div>
 </div>
 <!-- page section end-->
 
-<?php 
+<?php
 get_template_part('templates/newsletter');
 get_footer(); ?>

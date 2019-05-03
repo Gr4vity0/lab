@@ -47,7 +47,7 @@ class MgCustomizer
     $wp_customize->add_section('coding-index-section-logo', [
       'panel' => 'coding-panel-index',
       'title' => __('Personnalisation du Logo'),
-      'description' => __('Personnalisez le Logo')
+      'description' => __('Personnalisez le Logo. Vueillez inserer un logo avec une hauteur de 32px et une largeur de 111px pour une meilleure compatibilité')
     ]);
 
     //Section Index Description (discover the world)
@@ -132,9 +132,17 @@ class MgCustomizer
       'description' => __('Modifiez la citation')
     ]);
 
+// SECTIONS TEAM
+
+$wp_customize->add_section('coding-team', [
+  'panel' => 'coding-panel-index',
+  'title' => __('Modifiez la section team'),
+  'description' => __('Modifiez la section team')
+]);
 
 
 
+    
 //SETTINGS ET CONTROLS INDEX
 //----------------------------------------------
 
@@ -146,6 +154,7 @@ class MgCustomizer
       array(
         'label' => 'Logo',
         'section' => 'coding-index-section-logo',
+        
       )
     ));
 
@@ -213,28 +222,6 @@ class MgCustomizer
     $wp_customize->add_control('about-control-c', [
       'section' => 'coding-index-section-description',
       'settings' => 'titredesc',
-      'label' => __('Modifier le Titre de la description'),
-      'description' => __('Modifier le titre de la description'),
-      'type' => 'text'
-    ]);
-    //Description titre
-    $wp_customize->add_setting('titredesc2', [
-      'sanitize_callback' => 'wp_filter_nohtml_kses'
-    ]);
-    $wp_customize->add_control('about-control-z', [
-      'section' => 'coding-index-section-description',
-      'settings' => 'titredesc2',
-      'label' => __('Modifier le Titre de la description'),
-      'description' => __('Modifier le titre de la description'),
-      'type' => 'text'
-    ]);
-    //Description titre
-    $wp_customize->add_setting('titredesc3', [
-      'sanitize_callback' => 'wp_filter_nohtml_kses'
-    ]);
-    $wp_customize->add_control('about-control-y', [
-      'section' => 'coding-index-section-description',
-      'settings' => 'titredesc3',
       'label' => __('Modifier le Titre de la description'),
       'description' => __('Modifier le titre de la description'),
       'type' => 'text'
@@ -336,36 +323,27 @@ class MgCustomizer
     //SECTIONS SERVICES
 
     //Section Services Titre
+    //Services titre 3
     $wp_customize->add_setting('titreservice', [
       'sanitize_callback' => 'wp_filter_nohtml_kses'
     ]);
-    $wp_customize->add_control('about-control-aa', [
+    $wp_customize->add_control('about-control-cc', [
       'section' => 'coding-services',
       'settings' => 'titreservice',
       'label' => __('Modifier le Titre des services'),
       'description' => __('Modifier le titre des services'),
       'type' => 'text'
     ]);
-    //Services titre 2 (span)
-    $wp_customize->add_setting('titreservice2', [
+
+        //Titre LATEAM
+    $wp_customize->add_setting('titreteam', [
       'sanitize_callback' => 'wp_filter_nohtml_kses'
     ]);
-    $wp_customize->add_control('about-control--bb', [
-      'section' => 'coding-services',
-      'settings' => 'titreservice2',
-      'label' => __('Modifier le Titre de la description'),
-      'description' => __('Modifier le titre des services'),
-      'type' => 'text'
-    ]);
-    //Services titre 3
-    $wp_customize->add_setting('titreservice3', [
-      'sanitize_callback' => 'wp_filter_nohtml_kses'
-    ]);
-    $wp_customize->add_control('about-control-cc', [
-      'section' => 'coding-services',
-      'settings' => 'titreservice3',
-      'label' => __('Modifier le Titre des services'),
-      'description' => __('Modifier le titre des services'),
+    $wp_customize->add_control('about-control-vv', [
+      'section' => 'coding-team',
+      'settings' => 'titreteam',
+      'label' => __('Modifier le Titre de la section "team"'),
+      'description' => __('Modifier le titre de la section "team"'),
       'type' => 'text'
     ]);
 
@@ -485,28 +463,7 @@ class MgCustomizer
       'description' => __('Modifier le Titre des projets'),
       'type' => 'text'
     ]);
-    //Services titre
-    $wp_customize->add_setting('titreprojet2', [
-      'sanitize_callback' => 'wp_filter_nohtml_kses'
-    ]);
-    $wp_customize->add_control('about-control--ff', [
-      'section' => 'coding-page-service-projet',
-      'settings' => 'titreprojet2',
-      'label' => __('Modifier le Titre des projets'),
-      'description' => __('Modifier le Titre des projets'),
-      'type' => 'text'
-    ]);
-    //Services titre
-    $wp_customize->add_setting('titreprojet3', [
-      'sanitize_callback' => 'wp_filter_nohtml_kses'
-    ]);
-    $wp_customize->add_control('about-control-gg', [
-      'section' => 'coding-page-service-projet',
-      'settings' => 'titreprojet3',
-      'label' => __('Modifier le Titre des projets'),
-      'description' => __('Modifier le Titre des projetss'),
-      'type' => 'text'
-    ]);
+
 
     //Services service titre
     $wp_customize->add_setting('titreservice1', [
@@ -515,30 +472,6 @@ class MgCustomizer
     $wp_customize->add_control('about-control-hh', [
       'section' => 'coding-page-service-service',
       'settings' => 'titreservice1',
-      'label' => __('Modifier le Titre des services'),
-      'description' => __('Modifier le titre des services'),
-      'type' => 'text'
-    ]);
-
-    //Services titre
-    $wp_customize->add_setting('titreservice2', [
-      'sanitize_callback' => 'wp_filter_nohtml_kses'
-    ]);
-    $wp_customize->add_control('about-control--ii', [
-      'section' => 'coding-page-service-service',
-      'settings' => 'titreservice2',
-      'label' => __('Modifier le Titre de la description'),
-      'description' => __('Modifier le titre des services'),
-      'type' => 'text'
-    ]);
-
-    //Services titre
-    $wp_customize->add_setting('titreservice3', [
-      'sanitize_callback' => 'wp_filter_nohtml_kses'
-    ]);
-    $wp_customize->add_control('about-control-jj', [
-      'section' => 'coding-page-service-service',
-      'settings' => 'titreservice3',
       'label' => __('Modifier le Titre des services'),
       'description' => __('Modifier le titre des services'),
       'type' => 'text'

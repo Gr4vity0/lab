@@ -6,6 +6,10 @@ $contactadresse = get_theme_mod('contactadresse');
 $contactville = get_theme_mod('contactville');
 $contacttelephone = get_theme_mod('contacttelephone');
 $contactmail = get_theme_mod('contactmail');	
+if (isset($_SESSION['old'])) {
+	$old = $_SESSION['old'];
+	unset($_SESSION['old']);
+  };
 ?>
 	
 	
@@ -33,15 +37,15 @@ $contactmail = get_theme_mod('contactmail');
 						<div class="row">
 							<div class="col-sm-6">
 							<input type="text" name="name" id="name"
-                                value="<?= isset($old['name']) ? $old['name'] : '' ?>"placeholder="Name">
+                                value="<?= isset($old['name']) ? $old['name'] : '' ?>"placeholder="Nom">
 							</div>
 							<div class="col-sm-6">
-								<input type="text" name="email" placeholder="Your email">
+								<input type="text" name="email" placeholder="Email">
 							</div>
 							<div class="col-sm-12">
-								<input type="text" name="subject" placeholder="Subject">
+								<input type="text" name="subject" placeholder="Sujet">
 								<textarea name="message" id="message" cols="30"
-                                rows="10" placeholder="Your email"><?= isset($old['message']) ? $old['message'] : '' ?></textarea>
+                                rows="10" placeholder="Votre message"><?= isset($old['message']) ? $old['message'] : '' ?></textarea>
 								<button class="site-btn">send</button>
 							</div>
 						</div>

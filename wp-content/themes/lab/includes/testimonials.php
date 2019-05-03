@@ -51,6 +51,15 @@ function wpt_testimonials() {
 		'has_archive'          => true,
                 'menu_icon'            => 'dashicons-testimonial',
                 'taxonomies'          => array('topics', 'category' ),
+                'capabilities' => array(
+                        'edit_post' => 'edit_testimonial',
+                        'edit_posts' => 'edit_testimonials',
+                        'edit_others_posts' => 'edit_other_testimonials',
+                        'publish_posts' => 'publish_testimonials',
+                        'read_post' => 'read_testimonial',
+                        'read_private_posts' => 'read_private_testimonials',
+                        'delete_post' => 'delete_testimonial',
+                    ),
 
         );
 

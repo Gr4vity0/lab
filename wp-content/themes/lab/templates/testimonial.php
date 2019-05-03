@@ -28,7 +28,8 @@ $query = new WP_Query( $args );
 							<p><?php the_content(); ?></p>
 							<div class="client-info">
 								<div class="avatar">
-									<?php the_post_thumbnail(); ?>
+									<img src='<?php the_post_thumbnail_url(); ?>' style="height: 100%;"/>
+									
 								</div>
 								<div class="client-name">
 									<h2><?php the_title(); ?></h2>

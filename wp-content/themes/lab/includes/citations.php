@@ -46,7 +46,15 @@ function wpt_citations() {
 		'has_archive'          => true,
                 'menu_icon'            => 'dashicons-format-quote',
                 'taxonomies'          => array('topics', 'category' ),
-
+                'capabilities' => array(
+                        'edit_post' => 'edit_citation',
+                        'edit_posts' => 'edit_citations',
+                        'edit_others_posts' => 'edit_other_citations',
+                        'publish_posts' => 'publish_citations',
+                        'read_post' => 'read_citation',
+                        'read_private_posts' => 'read_private_citations',
+                        'delete_post' => 'delete_citation',
+                    ),
         );
 
 	register_post_type( 'citations', $args );
